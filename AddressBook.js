@@ -54,6 +54,7 @@ let getContact = () => {
     let email = prompt("Enter Email : ");
     let contactInput = null;
 
+    
     try {
         contactInput = new Contact(firstName, lastName, address, city, state, zip, phoneNumber, email);
     } catch (error) {
@@ -62,6 +63,7 @@ let getContact = () => {
     return contactInput;
 };
 
+let countContacts = () => addressBookArr.reduce((total, contact) => total + 1, 0);
 
 let viewContacts = () => {
     addressBookArr.forEach(contact => console.log(contact.toString()));
@@ -70,6 +72,10 @@ let viewContacts = () => {
 let addContact = (contact) => {
     addressBookArr.push(contact);
     console.log("Contact Added Successfully!!")
+}
+
+let getindexByName = (frstName, lstName) => {
+    return addressBookArr.findIndex(contact => contact.firstName == frstName && contact.lastName == lstName);
 }
 
 let editContact = () => {
@@ -86,7 +92,7 @@ let editContact = () => {
 
 let deleteContact = () => {
     let frstName = prompt("Enter First Name : ");
-    let lstName = prompt("Enter Last Name : ");
+    let lstName = prompt("Enter Lastt Name : ");
     let index = getindexByName(frstName, lstName);
     if (index == -1)
         console.log("Could not find the contact!!")
@@ -100,7 +106,7 @@ let deleteContact = () => {
         console.log("Welcome to AddressBook Program!!");
         let choice = 0;
         do {
-            console.log("Choose\n1. View Contacts\n2. Add Contact\n3. Edit Contact By name\n4.Delete contact By Name \n5. Exit");
+            console.log("Choose\n1. View Contacts\n2. Add Contact\n3. Edit Contact By name\n4. Delete Contact\n5. Count Contacts \n6. Exit");
             choice = prompt("Enter Your Choice ");
             switch (choice) {
                 case "1": viewContacts();
@@ -111,8 +117,11 @@ let deleteContact = () => {
                     break;
                 case "4": console.log(deleteContact());
                     break;
-                case "5": console.log("Thanku::")
+                case "5": console.log(countContacts());
+                    break;
+                case "6": console.log("Exit");
+                    break;
                 default: console.log("Invalid Choice !!");
             }
         
-        } while (choice != 5)
+        } while (choice != 6)
