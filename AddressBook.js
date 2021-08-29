@@ -84,10 +84,23 @@ let editContact = () => {
     }
 }
 
+let deleteContact = () => {
+    let frstName = prompt("Enter First Name : ");
+    let lstName = prompt("Enter Last Name : ");
+    let index = getindexByName(frstName, lstName);
+    if (index == -1)
+        console.log("Could not find the contact!!")
+    else {
+        console.log("Contact deleted successfully!!");
+        return addressBookArr.splice(index, 1);
+
+    }
+}
+
         console.log("Welcome to AddressBook Program!!");
         let choice = 0;
         do {
-            console.log("Choose\n1. View Contacts\n2. Add Contact\n3. Edit Contact By name\n4. Exit");
+            console.log("Choose\n1. View Contacts\n2. Add Contact\n3. Edit Contact By name\n4.Delete contact By Name \n5. Exit");
             choice = prompt("Enter Your Choice ");
             switch (choice) {
                 case "1": viewContacts();
@@ -96,9 +109,10 @@ let editContact = () => {
                     break;
                 case "3": editContact();
                     break;
-                case "4": console.log("Exit!!");
+                case "4": console.log(deleteContact());
                     break;
+                case "5": console.log("Thanku::")
                 default: console.log("Invalid Choice !!");
             }
         
-        } while (choice != 4)
+        } while (choice != 5)
