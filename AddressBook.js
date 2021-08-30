@@ -7,7 +7,7 @@ let zipRegex = RegExp("^[a-zA-Z*&%$#-]{0}[0-9 ]{6,7}[a-zA-Z*&%$#-]{0}$");
 let phoneNumberRegex = RegExp("^[6-9]{1}[0-9]{9}$");
 let emailRegex = RegExp("^([a-z0-9]+.)+@([a-z0-9]+.)([a-z]+.)[a-z]{2,3}$");
 
-class AddressBook {
+class Contact {
     constructor(...params) {
         if (nameRegex.test(params[0]))
             this.firstName = params[0];
@@ -66,7 +66,7 @@ let getContact = () => {
 let countContacts = () => addressBookArr.reduce((total, contact) => total + 1, 0);
 
 let viewContacts = () => {
-    addressBookArr.forEach(contact => console.log(contact.toString()));
+    addressBookArr.forEach(contact => console.log(Contact.toString));
 }
 
 let addContact = (contact) => {
@@ -75,7 +75,7 @@ let addContact = (contact) => {
 }
 
 let getindexByName = (frstName, lstName) => {
-    return addressBookArr.findIndex(contact => contact.firstName == frstName && contact.lastName == lstName);
+    return addressBookArr.findIndex(contact=> contact.firstName == frstName && contact.lastName == lstName);
 }
 
 let editContact = () => {
