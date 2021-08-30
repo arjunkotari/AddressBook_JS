@@ -103,25 +103,39 @@ let deleteContact = () => {
     }
 }
 
-        console.log("Welcome to AddressBook Program!!");
-        let choice = 0;
-        do {
-            console.log("Choose\n1. View Contacts\n2. Add Contact\n3. Edit Contact By name\n4. Delete Contact\n5. Count Contacts \n6. Exit");
-            choice = prompt("Enter Your Choice ");
-            switch (choice) {
-                case "1": viewContacts();
-                    break;
-                case "2": addContact(getContact());
-                    break;
-                case "3": editContact();
-                    break;
-                case "4": console.log(deleteContact());
-                    break;
-                case "5": console.log(countContacts());
-                    break;
-                case "6": console.log("Exit");
-                    break;
-                default: console.log("Invalid Choice !!");
-            }
-        
-        } while (choice != 6)
+let searchByCity = () => {
+    let searchCity = prompt("Enter the city name ");
+    return addressBookArr.filter(contact => Contact.city == searchCity);
+}
+
+let searchByState = () => {
+    let searchState = prompt("Enter the state name ");
+    return addressBookArr.filter(contact => contact.state == searchState);
+}
+
+console.log("Welcome to AddressBook Program!!");
+let choice = 0;
+do {
+    console.log("Choose\n1. View Contacts\n2. Add Contact\n3. Edit Contact By name\n4. Delete Contact\n5. Count Contacts \n6. Search Contacts By City\n7. Search Contacts By State\n8. Exit");
+    choice = prompt("Enter Your Choice ");
+    switch (choice) {
+        case "1": viewContacts();
+            break;
+        case "2": addContact(getContact());
+            break;
+        case "3": editContact();
+            break;
+        case "4": console.log(deleteContact());
+            break;
+        case "5": console.log(countContacts());
+            break;
+        case "6": searchByCity();
+            break;
+        case "7": searchByState();
+            break;
+        case "8": console.log("Exit");
+            break;
+        default: console.log("Invalid Choice !!");
+    }
+
+} while (choice != 8)
