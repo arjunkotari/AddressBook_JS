@@ -4,14 +4,14 @@ const Contact = require('./Contact.js')
 let addressBookArr = new Array();
 
 let getContact = () => {
-    let firstName = prompt("Enter First Name ");
-    let lastName = prompt("Enter Last Name ");
-    let address = prompt("Enter Address ");
-    let city = prompt("Enter City ");
-    let state = prompt("Enter State ");
-    let zip = prompt("Enter Zip ");
-    let phoneNumber = prompt("Enter Phone Number ");
-    let email = prompt("Enter Email ");
+    let firstName = prompt("Enter First Name : ");
+    let lastName = prompt("Enter Last Name : ");
+    let address = prompt("Enter Address : ");
+    let city = prompt("Enter City : ");
+    let state = prompt("Enter State : ");
+    let zip = prompt("Enter Zip : ");
+    let phoneNumber = prompt("Enter Phone Number : ");
+    let email = prompt("Enter Email : ");
     let contactInput = null;
 
     try {
@@ -22,18 +22,18 @@ let getContact = () => {
     return contactInput;
 };
 
-let countContacts = () => addressBookArr.reduce((total, contact) => total + 1, 0);
+let countContacts = () => addressBookArr.reduce((total, Contact) => total + 1, 0);
 
 let viewContacts = () => {
     console.log("Number of contacts in this addressbook : " + countContacts());
-    addressBookArr.forEach(contact => console.log(contact.toString()));
+    addressBookArr.forEach(contact => console.log(Contact.toString()));
 }
 
 
 let addContact = (contact) => {
-    let index = getindexByName(contact.firstName, contact.lastName);
+    let index = getindexByName(Contact.firstName, Contact.lastName);
     if (index == -1) {
-        addressBookArr.push(contact);
+        addressBookArr.push(Contact);
         console.log("Contact Added Successfully!!");
     }
     else
@@ -41,13 +41,13 @@ let addContact = (contact) => {
 }
 
 let getindexByName = (frstName, lstName) => {
-    return addressBookArr.findIndex(contact => contact.firstName == frstName && contact.lastName == lstName);
+    return addressBookArr.findIndex(contact => Contact.firstName == frstName && Contact.lastName == lstName);
 }
 
 let editContact = () => {
     let frstName = prompt("Enter First Name : ");
     let lstName = prompt("Enter Lastt Name : ");
-    let index = addressBookArr.findIndex(contact => contact.firstName == frstName && contact.lastName == lstName);
+    let index = addressBookArr.findIndex(contact => Contact.firstName == frstName && Contact.lastName == lstName);
     if (index == -1)
         console.log("Could not find the contact!!")
     else {
@@ -71,18 +71,30 @@ let deleteContact = () => {
 
 let searchByCity = () => {
     let searchCity = prompt("Enter the city name ");
-    return addressBookArr.filter(contact => contact.city == searchCity);
+    return addressBookArr.filter(contact => Contact.city == searchCity);
 }
 
 let searchByState = () => {
     let searchState = prompt("Enter the state name ");
-    return addressBookArr.filter(contact => contact.state == searchState);
+    return addressBookArr.filter(contact => Contact.state == searchState);
+}
+
+let countByCityState = (item) => {
+    let contactsByItemArr = new Array();
+    let itemName = prompt("Enter the " + item + " name ");
+    if (item == "City")
+        contactsByItemArr = addressBookArr.filter(contact => Contact.city == itemName);
+    else if (item == "State")
+        contactsByItemArr = addressBookArr.filter(contact => Contact.state == itemName);
+    console.log("Number of contacts " + countContacts(contactsByItemArr));
+    contactsByItemArr.forEach(contact => console.log(Contact.toString()))
+
 }
 
 console.log("Welcome to AddressBook Program!!");
 let choice = 0;
 do {
-    console.log("Choose\n1. View Contacts\n2. Add Contact\n3. Edit Contact By name\n4. Delete Contact\n5. Search Contacts By City\n6. Search Contacts By State\n7. Exit");
+    console.log("Choose\n1. View Contacts\n2. Add Contact\n3. Edit Contact By name\n4. Delete Contact\n5. Search Contacts By City\n6. Search Contacts By State \n7. Count contacts by city/state\n8. Exit");
     choice = prompt("Enter Your Choice ");
     switch (choice) {
         case "1": viewContacts();
@@ -97,9 +109,11 @@ do {
             break;
         case "6": searchByState();
             break;
-        case "7": console.log("Bye!!");
+        case "7": countByCityState();
+            break;
+        case "8": console.log("Bye!!");
             break;
         default: console.log("Invalid Choice !!");
     }
 
-} while (choice != 7)
+} while (choice != 8)
